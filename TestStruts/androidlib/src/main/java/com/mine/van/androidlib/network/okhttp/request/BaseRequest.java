@@ -35,8 +35,21 @@ public abstract class BaseRequest {
         this.cacheControl = cacheControl;
     }
 
+    public BaseRequest(String url, Map<String, String> params, List<FileEntity> files, Map<String, String> headers, Object tag, CacheControl cacheControl) {
+        this.url = url;
+        this.params = params;
+        this.files = files;
+        this.headers = headers;
+        this.tag = tag;
+        this.cacheControl = cacheControl;
+    }
+
     public abstract Request request();
 
+    /**
+     * 初始化cacheControl、tag和headers
+     * @param builder
+     */
     protected void setCommonBuilder(Request.Builder builder){
         if(null != cacheControl)
             builder.cacheControl(cacheControl);
