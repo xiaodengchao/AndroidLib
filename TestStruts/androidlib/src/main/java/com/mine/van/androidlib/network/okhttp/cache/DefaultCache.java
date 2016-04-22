@@ -25,9 +25,14 @@ public class DefaultCache {
 
     public DefaultCache(Context context) {
         cachePath = getCachePath(context);
-        if(FileUtils.CreateFile(cachePath)) {
+        if(FileUtils.isFileExist(cachePath)){
             File file = new File(cachePath);
             cache = new Cache(file, DEFAULT_CACHE_SIZE);
+        }else {
+            if (FileUtils.CreateFile(cachePath)) {
+                File file = new File(cachePath);
+                cache = new Cache(file, DEFAULT_CACHE_SIZE);
+            }
         }
     }
 
